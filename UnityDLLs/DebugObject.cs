@@ -47,6 +47,8 @@ namespace Rodger
             {
                 Debug.Log("Connect Exception : " + EX);
 
+                tcpClient.Close();
+
                 Global.ReleaseDebugObj();
 
                 Destroy(gameObject);
@@ -74,6 +76,8 @@ namespace Rodger
             catch
             {
                 Debug.Log("遠端主機關閉");
+
+                tcpClient.Close();
 
                 Global.ReleaseDebugObj();
 
