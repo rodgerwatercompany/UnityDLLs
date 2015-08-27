@@ -1,13 +1,12 @@
 ﻿
 using UnityEngine;
 
-using System.Collections.Generic;
-
 namespace Rodger
 {
 
     public delegate void VOIDCB();
     public delegate void VOIDintCB(int value);
+    public delegate void VOIDBOOLCB(bool value);
 
     public class Global
     {
@@ -16,7 +15,7 @@ namespace Rodger
         static public void SetupDebug(DebugObject obj, string serverip)
         {
             DebugObj = obj;
-            string logname = SystemInfo.graphicsDeviceName + " " + SystemInfo.deviceUniqueIdentifier;
+            string logname = SystemInfo.deviceName + " " + SystemInfo.deviceUniqueIdentifier;
             DebugObj.Setup(serverip, logname);
         }
 
@@ -32,6 +31,11 @@ namespace Rodger
                 Debug.Log("use logserver " + str);
                 DebugObj.print(str);
             }
+            /*
+            else
+            {
+                Debug.Log("use no logserver " + str);
+            }*/
         }
 
     }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 using System;
 using System.Net.Sockets;
@@ -11,7 +10,9 @@ namespace Rodger
 
         private TcpClient tcpClient;
 
-        public string ServerIP;        
+        public string ServerIP;
+
+        public int GameCode;
 
         void Awake()
         {
@@ -60,8 +61,7 @@ namespace Rodger
         }
         void WriteToLServer(string message)
         {
-
-            if (tcpClient.Connected)
+            try
             {
                 // Translate the passed message into ASCII and store it as a Byte array.
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
@@ -70,6 +70,14 @@ namespace Rodger
 
                 // Send the message to the connected TcpServer. 
                 stream.Write(data, 0, data.Length);
+            }
+            catch
+            {
+                Debug.Log("遠端主機關閉");
+
+                Global.ReleaseDebugObj();
+
+                Destroy(gameObject);
             }
         }
     }
